@@ -1,0 +1,16 @@
+services:
+  database:
+    image: postgres:18
+    container_name: aquisitions-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: aquisitions
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

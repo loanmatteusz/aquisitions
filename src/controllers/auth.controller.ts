@@ -90,8 +90,8 @@ export const signOut = async (_: Request, response: Response, next: NextFunction
         response.status(200).json({
             message: 'User signed out successfully',
         });
-    } catch (e) {
-        logger.error('Sign out error', e);
-        next(e);
+    } catch (error) {
+        logger.error('Sign out error', error);
+        next(error);
     }
 };

@@ -1,3 +1,4 @@
+import { InferModel } from "drizzle-orm";
 import { pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
@@ -9,3 +10,6 @@ export const users = pgTable('users', {
     created_at: timestamp().defaultNow().notNull(),
     updated_at: timestamp().defaultNow().notNull(),
 });
+
+export type User = InferModel<typeof users>;
+export type UpdateUser = Partial<Omit<User, 'id' | 'created_at' | 'updated_at'>>;

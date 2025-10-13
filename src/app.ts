@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { logger } from '#config/logger';
 import { authRoutes } from '#routes/auth.routes';
+import { securityMiddleware } from '#middlewares/security.middleware';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(morgan('combined', {
         write: (message: string) => logger.info(message.trim()),
     },
 }));
+app.use(securityMiddleware);
 
 app.get('/health', (_, response) => {
     response.status(200).json({ status: 'OK', timestamp: new Date().toISOString(), uptime: process.uptime() });

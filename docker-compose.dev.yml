@@ -1,0 +1,47 @@
+services:
+  database:
+    image: postgres:18
+    container_name: acquisitions-db
+    restart: always
+    ports:
+      - '5432:5432'
+    env_file:
+      - .env.development
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    networks:
+      - acquisitions-dev
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: acquisitions-app-dev
+    ports:
+      - '${PORT:-3000}:3000'
+    env_file:
+      - .env.development
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./logs:/app/logs
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - acquisitions-dev
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+
+networks:
+  acquisitions-dev:
+    driver: bridge

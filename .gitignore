@@ -3,5 +3,6 @@ dist
 logs
 
 .env
+.env.*
 
 drizzle-kit/*.tmp

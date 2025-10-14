@@ -4,8 +4,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { logger } from '#config/logger';
-import { authRoutes } from '#routes/auth.routes';
 import { securityMiddleware } from '#middlewares/security.middleware';
+import { authRoutes } from '#routes/auth.routes';
+import { userRoutes } from '#routes/user.routes';
 
 const app = express();
 
@@ -30,5 +31,6 @@ app.get('/api', (_, response) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 export { app };

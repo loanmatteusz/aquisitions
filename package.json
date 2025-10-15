@@ -7,6 +7,16 @@
   "keywords": [],
   "author": "loanmatteusz",
   "license": "ISC",
+  "imports": {
+    "#config/*": ["src/config/*"],
+    "#controllers/*": ["src/controllers/*"],
+    "#middlewares/*": ["src/middlewares/*"],
+    "#models/*": ["src/models/*"],
+    "#routes/*": ["src/routes/*"],
+    "#services/*": ["src/services/*"],
+    "#utils/*": ["src/utils/*"],
+    "#validations/*": ["src/validations/*"]
+  },
   "scripts": {
     "dev": "tsx --watch src/index.ts",
     "build": "tsc",
